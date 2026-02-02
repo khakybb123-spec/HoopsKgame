@@ -1,60 +1,139 @@
-let soBiMat = Math.floor(Math.random() * 101);
-let soLanDoan = 0;
-let gioiHanLan = 7;
-let diem = 0;
-let vong = 1;
-let tongVong = 5;
+let deck = [];
+let playerCards = [];
+let dealerCards = [];
+let gameOver = false;
+let money = 10000;
+let currentBet = 0;
+let hideDealer = true;
 
-function resetVong() {
-  soBiMat = Math.floor(Math.random() * 101);
-  soLanDoan = 0;
-  document.getElementById("round").innerText = vong;
-}
+function createDeck() {
+  const suits = ["♠", "♥", "♦", "♣"];
+  const values = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+  deck = [];
 
-function hienThongBao(text, type) {
-  const effect = document.getElementById("effect");
-  effect.innerText = text;
-  effect.className = "effect " + type;
-}
-
-function checkGuess() {
-  const doan = Number(document.getElementById("guess").value);
-
-  if (isNaN(doan)) return;
-
-  soLanDoan++;
-
-  if (doan < soBiMat) {
-    hienThongBao("Trên", "lose");
-  } else if (doan > soBiMat) {
-    hienThongBao("Dưới", "lose");
-  } else {
-    diem++;
-    document.getElementById("score").innerText = diem;
-    hienThongBao("Chuẩn luôn bro 🏀", "win");
-
-    vong++;
-
-    if (vong > tongVong) {
-      alert("Xin chúc mừng bro 🎉");
-      return;
+  for (let s of suits) {
+    for (let v of values) {
+      deck.push({ value: v, suit: s });
     }
+  }
 
-    resetVong();
+  deck.sort(() => Math.random() - 0.5);
+}
+
+function cardValue(card) {
+  if (card.value === "A") return 11;
+  if (["J","Q","K"].includes(card.value)) return 10;
+  return parseInt(card.value);
+}
+
+function calculateScore(cards) {
+  let sum = 0;
+  let aceCount = 0;
+
+  for (let c of cards) {
+    sum += cardValue(c);
+    if (c.value === "A") aceCount++;
+  }
+
+  while (sum > 21 && aceCount > 0) {
+    sum -= 10;
+    aceCount--;
+  }
+
+  return sum;
+}
+
+function drawCard() {
+  if (deck.length === 0) createDeck();
+  return deck.pop();
+}
+
+function updateMoney() {
+  document.getElementById("money").innerText = money;
+  document.getElementById("currentBet").innerText = currentBet;
+}
+
+function setBet(amount) {
+  if (money >= amount) {
+    currentBet = amount;
+    updateMoney();
+  } else {
+    alert("Bạn không đủ tiền!");
+  }
+}
+
+function renderCards() {
+  document.getElementById("playerCards").innerHTML =
+    playerCards.map(c => `<span class="card">${c.value}${c.suit}</span>`).join("");
+
+  document.getElementById("dealerCards").innerHTML = dealerCards.map((c, i) => {
+    if (hideDealer && i === 0 && !gameOver) {
+      return `<span class="card hidden">?</span>`;
+    }
+    return `<span class="card">${c.value}${c.suit}</span>`;
+  }).join("");
+
+  document.getElementById("playerScore").innerText = calculateScore(playerCards);
+  document.getElementById("dealerScore").innerText =
+    hideDealer && !gameOver ? "?" : calculateScore(dealerCards);
+}
+
+function startGame() {
+  if (currentBet === 0) {
+    alert("Chọn mức cược trước!");
     return;
   }
 
-  if (soLanDoan >= gioiHanLan) {
-    hienThongBao("Sao bro ngáo thế :)", "lose");
-    vong++;
+  createDeck();
+  playerCards = [drawCard(), drawCard()];
+  dealerCards = [drawCard(), drawCard()];
+  hideDealer = true;
+  gameOver = false;
+  document.getElementById("result").innerText = "";
+  renderCards();
+}
 
-    if (vong > tongVong) {
-      alert("Game over rồi bro 😅");
-      return;
-    }
+function hit() {
+  if (gameOver) return;
 
-    resetVong();
+  playerCards.push(drawCard());
+  renderCards();
+
+  if (calculateScore(playerCards) > 21) {
+    money -= currentBet;
+    document.getElementById("result").innerText = "💥 Quắc! Bạn thua!";
+    gameOver = true;
+    hideDealer = false;
+    renderCards();
+    updateMoney();
   }
 }
 
-resetVong();
+function stand() {
+  if (gameOver) return;
+
+  hideDealer = false;
+
+  while (calculateScore(dealerCards) < 17) {
+    dealerCards.push(drawCard());
+  }
+
+  let p = calculateScore(playerCards);
+  let d = calculateScore(dealerCards);
+
+  if (d > 21 || p > d) {
+    document.getElementById("result").innerText = "🎉 Bạn thắng!";
+    money += currentBet;
+  } else if (p < d) {
+    document.getElementById("result").innerText = "😢 Bạn thua!";
+    money -= currentBet;
+  } else {
+    document.getElementById("result").innerText = "🤝 Hòa!";
+  }
+
+  gameOver = true;
+  renderCards();
+  updateMoney();
+}
+
+updateMoney();

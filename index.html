@@ -2,23 +2,46 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Khả Kỳ xin hướng dẫn bạn</title>
+  <title>Blackjack Casino - KHA KY</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="game-container">
-    <h1>Khả Kỳ xin hướng dẫn bạn</h1>
-    <p>Đoán số từ 0 đến 100</p>
+  <div class="bg-decor left">🂡🂱🃁🃑</div>
+  <div class="bg-decor right">🂫🂻🃋🃛</div>
 
-    <input type="number" id="guess" placeholder="Nhập số bạn đoán">
-    <button onclick="checkGuess()">Đoán</button>
+  <div class="table">
+    <h1>🃏 Blackjack Casino</h1>
+    <p class="welcome">Nhà cái <b>KHA KY</b> xin chào bạn</p>
 
-    <div id="progress">
-      <p>Vòng: <span id="round">1</span> / 5</p>
-      <p>Điểm: <span id="score">0</span></p>
+    <div class="money">💰 Tiền: <span id="money">10000</span>$</div>
+
+    <div class="bets">
+      Cược:
+      <button onclick="setBet(100)">100</button>
+      <button onclick="setBet(500)">500</button>
+      <button onclick="setBet(1000)">1000</button>
+      <span id="currentBet">0</span>$
     </div>
 
-    <div id="effect" class="effect"></div>
+    <div class="area">
+      <h2>Nhà cái</h2>
+      <div id="dealerCards" class="cards"></div>
+      <p>Điểm: <span id="dealerScore">?</span></p>
+    </div>
+
+    <div class="area">
+      <h2>Người chơi</h2>
+      <div id="playerCards" class="cards"></div>
+      <p>Điểm: <span id="playerScore">0</span></p>
+    </div>
+
+    <div class="buttons">
+      <button onclick="startGame()">Chia bài</button>
+      <button onclick="hit()">Rút thêm</button>
+      <button onclick="stand()">Dừng</button>
+    </div>
+
+    <div id="result" class="result"></div>
   </div>
 
   <script src="script.js"></script>
