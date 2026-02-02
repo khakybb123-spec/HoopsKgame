@@ -1,71 +1,74 @@
 body {
-  background: linear-gradient(135deg, #6a0dad, #9b59b6);
+  margin: 0;
   font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(135deg, #6a00ff, #a855f7);
   height: 100vh;
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .game-container {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   padding: 30px;
   border-radius: 16px;
+  color: white;
   text-align: center;
-  width: 350px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-h1 {
-  margin-bottom: 10px;
-}
-
-button {
-  background: #ff9800;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 8px 0;
-  font-weight: bold;
-}
-
-button:hover {
-  background: #ffa726;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 input {
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: none;
-  width: 80%;
-  margin: 10px 0;
+  width: 65%;
+  outline: none;
 }
 
-.score {
-  margin: 10px 0;
-  font-size: 18px;
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #facc15;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 6px;
 }
 
-.result {
-  margin-top: 15px;
-  font-size: 20px;
-  min-height: 24px;
+button:hover {
+  background: #fde047;
+}
+
+#progress {
+  margin-top: 10px;
+  font-size: 16px;
 }
 
 .effect {
-  margin-top: 10px;
-  font-size: 30px;
+  margin-top: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  min-height: 28px;
 }
 
-.hidden {
-  display: none;
+.effect.win {
+  color: #00ffcc;
+  animation: pop 0.3s ease;
 }
 
-.guide {
-  background: rgba(0,0,0,0.7);
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+.effect.lose {
+  color: #ff4d6d;
+  animation: shake 0.3s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.8); }
+  100% { transform: scale(1.2); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
 }

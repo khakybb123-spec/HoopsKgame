@@ -1,34 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <title>Kha Ky says hello</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Khả Kỳ xin hướng dẫn bạn</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="game-container">
-    <h1>Khả Kỳ xin chào bạn 🏀</h1>
+    <h1>Khả Kỳ xin hướng dẫn bạn</h1>
+    <p>Đoán số từ 0 đến 100</p>
 
-    <button id="guideBtn">Khả Kỳ xin hướng dẫn bạn</button>
+    <input type="number" id="guess" placeholder="Nhập số bạn đoán">
+    <button onclick="checkGuess()">Đoán</button>
 
-    <div id="guide" class="guide hidden">
-      <h2>How to Play</h2>
-      <p>
-        The system will randomly choose a number from 0 to 100. <br />
-        You enter a number and press the Shoot button. <br />
-        If your number matches the system number, you win and get 1 point. <br />
-        If not, you lose. Try again in the next round!
-      </p>
-      <button onclick="closeGuide()">Close</button>
+    <div id="progress">
+      <p>Vòng: <span id="round">1</span> / 5</p>
+      <p>Điểm: <span id="score">0</span></p>
     </div>
 
-    <div class="score">Score: <span id="score">0</span></div>
-
-    <input type="number" id="guessInput" placeholder="Enter number 0 - 100" />
-    <button id="shootBtn">🏀 Shoot the Ball</button>
-
-    <div id="result" class="result"></div>
-    <div class="effect" id="effect"></div>
+    <div id="effect" class="effect"></div>
   </div>
 
   <script src="script.js"></script>
