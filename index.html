@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kha Ky says hello</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-container">
+    <h1>Khả Kỳ xin chào bạn 🏀</h1>
+
+    <button id="guideBtn">Khả Kỳ xin hướng dẫn bạn</button>
+
+    <div id="guide" class="guide hidden">
+      <h2>How to Play</h2>
+      <p>
+        The system will randomly choose a number from 0 to 100. <br />
+        You enter a number and press the Shoot button. <br />
+        If your number matches the system number, you win and get 1 point. <br />
+        If not, you lose. Try again in the next round!
+      </p>
+      <button onclick="closeGuide()">Close</button>
+    </div>
+
+    <div class="score">Score: <span id="score">0</span></div>
+
+    <input type="number" id="guessInput" placeholder="Enter number 0 - 100" />
+    <button id="shootBtn">🏀 Shoot the Ball</button>
+
+    <div id="result" class="result"></div>
+    <div class="effect" id="effect"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

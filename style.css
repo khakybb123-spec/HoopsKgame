@@ -1,0 +1,71 @@
+body {
+  background: linear-gradient(135deg, #6a0dad, #9b59b6);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+}
+
+.game-container {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  width: 350px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+button {
+  background: #ff9800;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #ffa726;
+}
+
+input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  width: 80%;
+  margin: 10px 0;
+}
+
+.score {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.result {
+  margin-top: 15px;
+  font-size: 20px;
+  min-height: 24px;
+}
+
+.effect {
+  margin-top: 10px;
+  font-size: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.guide {
+  background: rgba(0,0,0,0.7);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
